@@ -81,57 +81,79 @@
   </main>
 
   <!-- Modal de Contato -->
-  <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-    <div class="bg-white rounded-2xl p-8 max-w-md w-full relative">
-      <button onclick="toggleModal()" class="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-2xl">&times;</button>
-      <h3 style="color: #0a77a9;" class="text-xl font-semibold mb-4 text-center">Fale com a NeoTI</h3>
+<!-- Modal de Contato -->
+<div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+  <div class="bg-white rounded-2xl p-8 max-w-md w-full relative">
+    <button onclick="toggleModal()" class="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-2xl">&times;</button>
+    <h3 style="color: #0a77a9;" class="text-xl font-semibold mb-4 text-center">Fale com a NeoTI</h3>
+    
+    <!-- Formulário com integração ao FormSubmit -->
+    <form id="contactForm" action="https://formsubmit.co/ajax/avaniltondepaula@gmail.com" method="POST">
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="box" />
+      <input type="hidden" name="_autoresponse" value="Recebemos sua mensagem! Em breve entraremos em contato." />
       
-      <!-- Formulário com integração ao FormSubmit -->
-      <form id="contactForm" action="https://formsubmit.co/avaniltondepaula@gmail.com" method="POST">
-        <input type="hidden" name="_captcha" value="false" />
-        <input type="hidden" name="_template" value="box" />
-        <input type="hidden" name="_autoresponse" value="Recebemos sua mensagem! Em breve entraremos em contato." />
-        
-        <label class="block mb-2 text-sm">Nome completo:</label>
-        <input type="text" name="Nome completo" required class="w-full mb-4 p-2 border rounded-md" />
+      <label class="block mb-2 text-sm">Nome completo:</label>
+      <input type="text" name="Nome completo" required class="w-full mb-4 p-2 border rounded-md" />
 
-        <label class="block mb-2 text-sm">Telefone:</label>
-        <input type="text" id="telefone" name="Telefone" required class="w-full mb-4 p-2 border rounded-md" />
+      <label class="block mb-2 text-sm">Telefone:</label>
+      <input type="text" id="telefone" name="Telefone" required class="w-full mb-4 p-2 border rounded-md" />
 
-        <label class="block mb-2 text-sm">E-mail:</label>
-        <input type="email" name="E-mail" required class="w-full mb-4 p-2 border rounded-md" />
+      <label class="block mb-2 text-sm">E-mail:</label>
+      <input type="email" name="E-mail" required class="w-full mb-4 p-2 border rounded-md" />
 
-        <label class="block mb-2 text-sm">Mensagem:</label>
-        <textarea name="Mensagem" maxlength="500" required class="w-full mb-4 p-2 border rounded-md" rows="4"></textarea>
+      <label class="block mb-2 text-sm">Mensagem:</label>
+      <textarea name="Mensagem" maxlength="500" required class="w-full mb-4 p-2 border rounded-md" rows="4"></textarea>
 
-        <button  style="background-color: #0a77a9;" type="submit" class="w-full text-white py-2 rounded-md hover:bg-blue-700">Enviar</button>
-        <input type="hidden" name="_next" value="https://seudominio.com/obrigado.html" />
-      </form>
+      <button style="background-color: #0a77a9;" type="submit" class="w-full text-white py-2 rounded-md hover:bg-blue-700">Enviar</button>
+    </form>
 
-      <p id="formMessage" class="text-green-600 text-center mt-4 hidden">Obrigado! Em breve entraremos em contato.</p>
-    </div>
+    <p id="formMessage" class="text-green-600 text-center mt-4 hidden text-lg font-medium">
+      Obrigado, entraremos em contato em breve!
+    </p>
   </div>
+</div>
 
-  <!-- Scripts -->
-  <script>
-    function toggleModal() {
-      const modal = document.getElementById("contactModal");
-      modal.classList.toggle("hidden");
-    }
+<!-- Script de envio e redirecionamento -->
+<script>
+  function toggleModal() {
+    const modal = document.getElementById("contactModal");
+    modal.classList.toggle("hidden");
+  }
 
-    // Máscara de telefone
-    const telefoneInput = document.getElementById("telefone");
-    IMask(telefoneInput, {
-      mask: '(00) 0 0000-0000'
+  // Máscara de telefone
+  const telefoneInput = document.getElementById("telefone");
+  IMask(telefoneInput, {
+    mask: '(00) 0 0000-0000'
+  });
+
+  // Envio assíncrono com mensagem e redirecionamento
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    
+    fetch(form.action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        form.classList.add("hidden");
+        document.getElementById("formMessage").classList.remove("hidden");
+
+        setTimeout(() => {
+          window.location.href = "https://instagram.com/paginadoinstagram";
+        }, 3000); // Redireciona após 3 segundos
+      } else {
+        alert("Erro ao enviar. Tente novamente.");
+      }
     });
+  });
+</script>
 
-  
-    // Mensagem após envio (caso queira ativar com JS futuramente)
-   /* document.getElementById("contactForm").addEventListener("submit", function (e) {
-     e.preventDefault();
-      document.getElementById("formMessage").classList.remove("hidden");
-      this.reset();
-     });*/
-  </script>
 </body>
 </html>
