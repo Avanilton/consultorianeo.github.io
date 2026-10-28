@@ -1,208 +1,1428 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NeoTI - Soluções em TI</title>
-  <link rel="icon" type="image/x-icon" href="/Favicon.png">
+  <title>Neo Consultoria & Tecnologia | Desenvolvimento de Software, Automação & RPA</title>
+  <meta name="description" content="Transformamos a operação da sua empresa com softwares sob medida, robotização de tarefas repetitivas (RPA), inteligência de dados e consultoria estratégica em TI." />
+  <meta name="keywords" content="desenvolvimento de software, automação de processos, RPA, consultoria em TI, dashboards BI, sistemas sob medida, redução de custos operacionais" />
+  <meta property="og:title" content="Neo Consultoria & Tecnologia | Softwares & Automações Sob Medida" />
+  <meta property="og:description" content="Aplicações web modernas, automação inteligente e robotização de processos para alavancar a produtividade do seu negócio." />
+  <meta property="og:image" content="/Logo.png" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/x-icon" href="/Favicon.png" />
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            neo: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#044bf7',
+              700: '#0238c4',
+              800: '#041566',
+              900: '#020b3b',
+              950: '#01051f',
+            },
+            accent: {
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+            }
+          },
+          boxShadow: {
+            'glow': '0 0 40px -10px rgba(4, 75, 247, 0.35)',
+            'card': '0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025)',
+            'card-hover': '0 20px 35px -5px rgba(4, 75, 247, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+          }
+        }
+      }
+    }
+  </script>
   <script src="https://unpkg.com/imask"></script>
+
   <style>
-      /* Estilo do ícone flutuante */
-      .whatsapp-float {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000;
+    /* Estilos personalizados & microanimações */
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .glass-dark {
+      background: rgba(7, 12, 32, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #041566 0%, #044bf7 60%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gradient-text-light {
+      background: linear-gradient(135deg, #ffffff 0%, #93c5fd 60%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .mesh-bg {
+      background-color: #f8fafc;
+      background-image: 
+        radial-gradient(at 10% 20%, rgba(4, 75, 247, 0.08) 0px, transparent 50%),
+        radial-gradient(at 90% 10%, rgba(6, 182, 212, 0.08) 0px, transparent 50%),
+        radial-gradient(at 50% 90%, rgba(4, 21, 102, 0.06) 0px, transparent 60%);
+    }
+    .hero-glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(4, 75, 247, 0.18) 0%, rgba(4, 75, 247, 0) 70%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    /* Botão WhatsApp Flutuante */
+    .whatsapp-pulse {
+      box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+      animation: pulse-green 2s infinite cubic-bezier(0.66, 0, 0, 1);
+    }
+    @keyframes pulse-green {
+      to {
+        box-shadow: 0 0 0 20px rgba(37, 211, 102, 0);
       }
-  
-      .whatsapp-float a {
-        display: inline-block;
-        background-color: #25D366;
-        border-radius: 50%;
-        padding: 15px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        transition: transform 0.3s ease;
-      }
-  
-      .whatsapp-float a:hover {
-        animation: pulse 1s infinite;
-      }
-  
-      .whatsapp-float img {
-        width: 40px;
-        height: 40px;
-      }
-  
-      /* Animação de pulsar */
-      @keyframes pulse {
-        0% {
-          transform: scale(1);
-        }
-        50% {
-          transform: scale(1.1);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
-    </style>
+    }
+    /* Animação suave para cards */
+    .card-transition {
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-transition:hover {
+      transform: translateY(-6px);
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-b from-blue-50 to-white text-gray-800">
+<body class="font-sans text-slate-800 bg-slate-50 antialiased selection:bg-neo-600 selection:text-white">
 
-  <div class="w-full flex justify-center mt-4">
-    <img src="/Logo.png" alt="Logo NeoTI" class="h-40 w-auto max-w-xs object-contain" />
-  </div>
-
- <!-- Cabeçalho -->
-  <main class="min-h-screen px-6 py-12">
-    <section class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-      <div class="rounded-2xl shadow-md bg-white p-6 text-center">
-        <div style="color: #041566;"  class=" w-10 h-10 mb-4 mx-auto">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-            <path d="M12 .75a8.25 8.25 0 0 0-4.135 15.39c.686.398 1.115 1.008 1.134 1.623a.75.75 0 0 0 .577.706c.352.083.71.148 1.074.195.323.041.6-.218.6-.544v-4.661a6.714 6.714 0 0 1-.937-.171.75.75 0 1 1 .374-1.453 5.261 5.261 0 0 0 2.626 0 .75.75 0 1 1 .374 1.452 6.712 6.712 0 0 1-.937.172v4.66c0 .327.277.586.6.545.364-.047.722-.112 1.074-.195a.75.75 0 0 0 .577-.706c.02-.615.448-1.225 1.134-1.623A8.25 8.25 0 0 0 12 .75Z" />
-            <path fill-rule="evenodd" d="M9.013 19.9a.75.75 0 0 1 .877-.597 11.319 11.319 0 0 0 4.22 0 .75.75 0 1 1 .28 1.473 12.819 12.819 0 0 1-4.78 0 .75.75 0 0 1-.597-.876ZM9.754 22.344a.75.75 0 0 1 .824-.668 13.682 13.682 0 0 0 2.844 0 .75.75 0 1 1 .156 1.492 15.156 15.156 0 0 1-3.156 0 .75.75 0 0 1-.668-.824Z" clip-rule="evenodd" />
-          </svg>
-          
+  <!-- ==================== HEADER / NAVBAR ==================== -->
+  <header class="fixed top-0 left-0 right-0 z-40 glass-nav border-b border-slate-200/80 transition-all duration-300" id="mainHeader">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <img src="/Logo.png" alt="Neo Consultoria & Tecnologia" class="h-12 w-auto object-contain transition-transform group-hover:scale-105" />
+        <div class="flex flex-col">
+          <span class="text-xl font-bold tracking-tight text-neo-800 leading-tight">NEO<span class="text-neo-600">.TI</span></span>
+          <span class="text-[10px] uppercase tracking-widest font-semibold text-slate-500">Consultoria & Software</span>
         </div>
-        <h3 class="text-lg font-semibold mb-2"><a href="https://www.instagram.com/neo_ti25"> Consultoria Especializada</a></h3>
-        <p class="text-sm text-gray-500"><a href="https://www.instagram.com/neo_ti25"> 
-          Diagnóstico e planejamento estratégico para transformar sua TI.
-        </a></p>
-      </div>
-
-      <div class="rounded-2xl shadow-md bg-white p-6 text-center">
-        <div style="color: #041566;" class="w-10 h-10 mb-4 mx-auto">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-            <path fill-rule="evenodd" d="M15.75 1.5a6.75 6.75 0 0 0-6.651 7.906c.067.39-.032.717-.221.906l-6.5 6.499a3 3 0 0 0-.878 2.121v2.818c0 .414.336.75.75.75H6a.75.75 0 0 0 .75-.75v-1.5h1.5A.75.75 0 0 0 9 19.5V18h1.5a.75.75 0 0 0 .53-.22l2.658-2.658c.19-.189.517-.288.906-.22A6.75 6.75 0 1 0 15.75 1.5Zm0 3a.75.75 0 0 0 0 1.5A2.25 2.25 0 0 1 18 8.25a.75.75 0 0 0 1.5 0 3.75 3.75 0 0 0-3.75-3.75Z" clip-rule="evenodd" />
-          </svg>
-          
-        </div>
-        <h3 class="text-lg font-semibold mb-2"><a href="https://www.instagram.com/neo_ti25"> Segurança da Informação</a></h3>
-        <p class="text-sm text-gray-500"><a href="https://www.instagram.com/neo_ti25"> 
-          Proteção completa dos dados e conformidade com a LGPD.
-        </a></p>
-      </div>
-
-      <div class="rounded-2xl shadow-md bg-white p-6 text-center">
-        <div style="color: #041566;" class="w-10 h-10 mb-4 mx-auto">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-            <path d="M11.25 5.337c0-.355-.186-.676-.401-.959a1.647 1.647 0 0 1-.349-1.003c0-1.036 1.007-1.875 2.25-1.875S15 2.34 15 3.375c0 .369-.128.713-.349 1.003-.215.283-.401.604-.401.959 0 .332.278.598.61.578 1.91-.114 3.79-.342 5.632-.676a.75.75 0 0 1 .878.645 49.17 49.17 0 0 1 .376 5.452.657.657 0 0 1-.66.664c-.354 0-.675-.186-.958-.401a1.647 1.647 0 0 0-1.003-.349c-1.035 0-1.875 1.007-1.875 2.25s.84 2.25 1.875 2.25c.369 0 .713-.128 1.003-.349.283-.215.604-.401.959-.401.31 0 .557.262.534.571a48.774 48.774 0 0 1-.595 4.845.75.75 0 0 1-.61.61c-1.82.317-3.673.533-5.555.642a.58.58 0 0 1-.611-.581c0-.355.186-.676.401-.959.221-.29.349-.634.349-1.003 0-1.035-1.007-1.875-2.25-1.875s-2.25.84-2.25 1.875c0 .369.128.713.349 1.003.215.283.401.604.401.959a.641.641 0 0 1-.658.643 49.118 49.118 0 0 1-4.708-.36.75.75 0 0 1-.645-.878c.293-1.614.504-3.257.629-4.924A.53.53 0 0 0 5.337 15c-.355 0-.676.186-.959.401-.29.221-.634.349-1.003.349-1.036 0-1.875-1.007-1.875-2.25s.84-2.25 1.875-2.25c.369 0 .713.128 1.003.349.283.215.604.401.959.401a.656.656 0 0 0 .659-.663 47.703 47.703 0 0 0-.31-4.82.75.75 0 0 1 .83-.832c1.343.155 2.703.254 4.077.294a.64.64 0 0 0 .657-.642Z" />
-          </svg>
-          
-        </div>
-        <h3 class="text-lg font-semibold mb-2"><a href="https://www.instagram.com/neo_ti25"> Automatização de Processos </a></h3>
-        <p class="text-sm text-gray-500"><a href="https://www.instagram.com/neo_ti25"> 
-          Identificação e implementação de soluções para ganho de eficiência.
-        </a></p>
-      </div>
-
-      <div class="rounded-2xl shadow-md bg-white p-6 text-center">
-        <div style="color: #041566;" class="w-10 h-10 mb-4 mx-auto">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-            <path fill-rule="evenodd" d="M2.25 2.25a.75.75 0 0 0 0 1.5H3v10.5a3 3 0 0 0 3 3h1.21l-1.172 3.513a.75.75 0 0 0 1.424.474l.329-.987h8.418l.33.987a.75.75 0 0 0 1.422-.474l-1.17-3.513H18a3 3 0 0 0 3-3V3.75h.75a.75.75 0 0 0 0-1.5H2.25Zm6.04 16.5.5-1.5h6.42l.5 1.5H8.29Zm7.46-12a.75.75 0 0 0-1.5 0v6a.75.75 0 0 0 1.5 0v-6Zm-3 2.25a.75.75 0 0 0-1.5 0v3.75a.75.75 0 0 0 1.5 0V9Zm-3 2.25a.75.75 0 0 0-1.5 0v1.5a.75.75 0 0 0 1.5 0v-1.5Z" clip-rule="evenodd" />
-          </svg>          
-        </div>
-        <h3 class="text-lg font-semibold mb-2"><a href="https://www.instagram.com/neo_ti25"> Governança de TI</a></h3>
-        <p class="text-sm text-gray-500"><a href="https://www.instagram.com/neo_ti25"> 
-          Estruturação de processos e boas práticas com foco em resultados.
-        </a></p>
-      </div>
-    </section>
-
-    <!-- Botão para contato -->
-    <section class="text-center mb-16">
-      <p class="text-gray-600 mb-6"><a href="https://www.instagram.com/neo_ti25"> 
-        Leve sua empresa para o próximo nível com uma consultoria de TI estratégica.
-      </a></p>
-      <button onclick="toggleModal()" style="background-color: #041566;" class="inline-block  hover:bg-blue-700 text-white px-6 py-3 text-lg rounded-2xl shadow">
-        Conhecer!
-      </button>
-    </section>
-  </main>
-
-<footer class="py-4 text-center text-gray-500 text-sm">
-    V1.3
-  </footer>
-<!-- Modal de Contato -->
-<div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-  <div class="bg-white rounded-2xl p-8 max-w-md w-full relative">
-    <button onclick="toggleModal()" class="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-2xl">&times;</button>
-    <h3 style="color: #041566;" class="text-xl font-semibold mb-4 text-center">Fale com a NeoTI</h3>
-    
-    <!-- Formulário com integração ao FormSubmit -->
-    <form id="contactForm" action="https://formsubmit.co/ajax/avaniltondepaula@gmail.com" method="POST">
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_template" value="box" />
-      <input type="hidden" name="_autoresponse" value="Recebemos sua mensagem! Em breve entraremos em contato." />
-      
-      <label class="block mb-2 text-sm">Nome completo:</label>
-      <input type="text" name="Nome completo" required class="w-full mb-4 p-2 border rounded-md" />
-
-      <label class="block mb-2 text-sm">Telefone:</label>
-      <input type="text" id="telefone" name="Telefone" required class="w-full mb-4 p-2 border rounded-md" />
-
-      <label class="block mb-2 text-sm">E-mail:</label>
-      <input type="email" name="E-mail" required class="w-full mb-4 p-2 border rounded-md" />
-
-      <label class="block mb-2 text-sm">Mensagem:</label>
-      <textarea name="Mensagem" maxlength="500" required class="w-full mb-4 p-2 border rounded-md" rows="4"></textarea>
-
-      <button style="background-color: #041566;" type="submit" class="w-full text-white py-2 rounded-md hover:bg-blue-700">Enviar</button>
-    </form>
-
-    <p id="formMessage" class="text-green-600 text-center mt-4 hidden text-lg font-medium">
-      Obrigado, entraremos em contato em breve!
-    </p>
-  </div>
-</div>
-
-<!-- Script de envio e redirecionamento -->
-<script>
-  function toggleModal() {
-    const modal = document.getElementById("contactModal");
-    modal.classList.toggle("hidden");
-  }
-
-  // Máscara de telefone
-  const telefoneInput = document.getElementById("telefone");
-  IMask(telefoneInput, {
-    mask: '(00) 0 0000-0000'
-  });
-
-  // Envio assíncrono com mensagem e redirecionamento
-  document.getElementById("contactForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    
-    const form = e.target;
-    const formData = new FormData(form);
-    
-    fetch(form.action, {
-      method: "POST",
-      body: formData,
-      headers: {
-        'Accept': 'application/json'
-      }
-    }).then(response => {
-      if (response.ok) {
-        form.classList.add("hidden");
-        document.getElementById("formMessage").classList.remove("hidden");
-
-        setTimeout(() => {
-          window.location.href = "https://www.instagram.com/neo_ti25";
-        }, 3000); // Redireciona após 3 segundos
-      } else {
-        alert("Erro ao enviar. Tente novamente.");
-      }
-    });
-  });
-</script>
-     <!-- Ícone do WhatsApp -->
-    <div class="whatsapp-float">
-      <a href="https://wa.me/5541992878797" target="_blank" title="Fale conosco no WhatsApp">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
       </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+        <a href="#solucoes" class="hover:text-neo-600 transition-colors">Soluções</a>
+        <a href="#portfolio" class="hover:text-neo-600 transition-colors">Portfólio</a>
+        <a href="#automacao" class="hover:text-neo-600 transition-colors">Automação & RPA</a>
+        <a href="#roi" class="hover:text-neo-600 transition-colors">Calculadora ROI</a>
+        <a href="#diferenciais" class="hover:text-neo-600 transition-colors">Por Que a Neo?</a>
+      </nav>
+
+      <!-- CTA Desktop -->
+      <div class="hidden md:flex items-center gap-4">
+        <a href="https://wa.me/5541992878797" target="_blank" class="inline-flex items-center gap-2 text-sm font-semibold text-slate-700 hover:text-neo-600 transition-colors">
+          <svg class="w-4 h-4 text-emerald-500" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          (41) 99287-8797
+        </a>
+        <button onclick="openContactModal('Consultoria Geral')" class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl font-semibold text-sm text-white bg-neo-800 hover:bg-neo-600 shadow-md hover:shadow-glow transition-all duration-200">
+          Falar com Especialista
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-700 hover:text-neo-600 focus:outline-none" aria-label="Abrir menu">
+        <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
     </div>
 
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white/95 backdrop-blur-md border-b border-slate-200 px-6 py-6 transition-all duration-300">
+      <nav class="flex flex-col gap-4 text-base font-medium text-slate-700">
+        <a href="#solucoes" onclick="toggleMobileMenu()" class="hover:text-neo-600 py-1">Soluções</a>
+        <a href="#portfolio" onclick="toggleMobileMenu()" class="hover:text-neo-600 py-1">Portfólio de Aplicações</a>
+        <a href="#automacao" onclick="toggleMobileMenu()" class="hover:text-neo-600 py-1">Automação & RPA</a>
+        <a href="#roi" onclick="toggleMobileMenu()" class="hover:text-neo-600 py-1">Calculadora ROI</a>
+        <a href="#diferenciais" onclick="toggleMobileMenu()" class="hover:text-neo-600 py-1">Por Que a Neo?</a>
+        <a href="#contato" onclick="toggleMobileMenu()" class="hover:text-neo-600 py-1">Fale Conosco</a>
+      </nav>
+      <div class="mt-6 pt-4 border-t border-slate-100 flex flex-col gap-3">
+        <button onclick="openContactModal('Consultoria Geral'); toggleMobileMenu()" class="w-full text-center px-5 py-3 rounded-xl font-semibold text-white bg-neo-800 hover:bg-neo-600 shadow-md">
+          Falar com Especialista
+        </button>
+        <a href="https://wa.me/5541992878797" target="_blank" class="w-full text-center px-5 py-3 rounded-xl font-semibold text-slate-800 bg-slate-100 hover:bg-slate-200">
+          WhatsApp: (41) 99287-8797
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO SECTION ==================== -->
+  <section class="relative pt-32 pb-20 md:pt-40 md:pb-28 mesh-bg overflow-hidden">
+    <div class="hero-glow top-20 left-1/2 -translate-x-1/2"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <!-- Badge Superior -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200/60 text-neo-700 text-xs sm:text-sm font-semibold mb-6 shadow-sm">
+          <span class="flex h-2 w-2 rounded-full bg-neo-600 animate-pulse"></span>
+          Engenharia de Software Sob Medida & Robotização de Processos
+        </div>
+
+        <!-- Headline Principal -->
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.15] mb-6">
+          Sua empresa não precisa de mais planilhas. <br class="hidden sm:inline" />
+          <span class="gradient-text">Precisa de tecnologia que trabalha por você.</span>
+        </h1>
+
+        <!-- Subheadline Persuasiva -->
+        <p class="text-base sm:text-xl text-slate-600 font-normal leading-relaxed mb-8 max-w-2xl mx-auto">
+          Desenvolvemos <strong>softwares corporativos sob medida</strong>, <strong>dashboards executivos</strong> e <strong>robôs de automação (RPA)</strong> que eliminam retrabalho, reduzem custos operacionais e aceleram a tomada de decisão.
+        </p>
+
+        <!-- Ações / CTAs -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
+          <button onclick="openContactModal('Diagnóstico Gratuito')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white bg-neo-800 hover:bg-neo-600 shadow-lg hover:shadow-glow transition-all duration-200 text-base flex items-center justify-center gap-3">
+            <span>Solicitar Diagnóstico Estratégico</span>
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+          <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-slate-700 bg-white hover:bg-slate-100 border border-slate-200/80 shadow-sm transition-all duration-200 text-base text-center">
+            Ver Portfólio de Aplicações
+          </a>
+        </div>
+
+        <!-- Barra de Credibilidade / Prova Numérica -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-slate-200/80 text-left">
+          <div class="bg-white/70 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/60 shadow-sm">
+            <div class="text-2xl sm:text-3xl font-extrabold text-neo-800">+150.000h</div>
+            <div class="text-xs sm:text-sm text-slate-500 font-medium mt-1">Horas economizadas com automações</div>
+          </div>
+          <div class="bg-white/70 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/60 shadow-sm">
+            <div class="text-2xl sm:text-3xl font-extrabold text-neo-600">Zero</div>
+            <div class="text-xs sm:text-sm text-slate-500 font-medium mt-1">Erros manuais em rotinas robotizadas</div>
+          </div>
+          <div class="bg-white/70 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/60 shadow-sm">
+            <div class="text-2xl sm:text-3xl font-extrabold text-slate-900">100%</div>
+            <div class="text-xs sm:text-sm text-slate-500 font-medium mt-1">Código exclusivo de sua propriedade</div>
+          </div>
+          <div class="bg-white/70 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/60 shadow-sm">
+            <div class="text-2xl sm:text-3xl font-extrabold text-emerald-600">3x a 5x</div>
+            <div class="text-xs sm:text-sm text-slate-500 font-medium mt-1">Mais agilidade em fluxos operacionais</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PROBLEMA VS SOLUÇÃO (PERSUASÃO) ==================== -->
+  <section class="py-16 bg-white border-y border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-neo-600 mb-2">O Custo Oculto da Ineficiência</h2>
+        <p class="text-2xl sm:text-3xl font-bold text-slate-900">Sua equipe está produzindo ou apenas digitando dados?</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 items-stretch">
+        <!-- Cenário Sem Tecnologia Sob Medida -->
+        <div class="p-8 rounded-3xl bg-rose-50/50 border border-rose-200/60 flex flex-col justify-between">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-bold mb-4">
+              <span>✕</span> O Modelo Antigo & Ineficiente
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Rotinas manuais que drenam lucros e energia</h3>
+            <ul class="space-y-3.5 text-sm sm:text-base text-slate-600">
+              <li class="flex items-start gap-3">
+                <span class="text-rose-500 font-bold">✕</span>
+                <span>Colaboradores caros perdendo horas copiando dados entre planilhas e sistemas.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-rose-500 font-bold">✕</span>
+                <span>Erros de digitação gerando multas fiscais, atrasos e retrabalho contínuo.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-rose-500 font-bold">✕</span>
+                <span>Decisões baseadas em "achismos" porque os relatórios demoram dias para ficar prontos.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-rose-500 font-bold">✕</span>
+                <span>Sistemas de mercado engessados que cobram mensalidades altíssimas e não atendem ao seu processo.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-rose-200/60 text-xs font-semibold text-rose-700">
+            Resultado: Alto custo operacional, estresse da equipe e crescimento travado.
+          </div>
+        </div>
+
+        <!-- Cenário Com a Neo -->
+        <div class="p-8 rounded-3xl bg-blue-50/60 border border-blue-200/70 flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute -right-8 -bottom-8 w-40 h-40 bg-neo-600/10 rounded-full blur-2xl pointer-events-none"></div>
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neo-100 text-neo-800 text-xs font-bold mb-4">
+              <span>✓</span> Com a Neo Consultoria & Tecnologia
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-4">Processos blindados, automatizados e em tempo real</h3>
+            <ul class="space-y-3.5 text-sm sm:text-base text-slate-700">
+              <li class="flex items-start gap-3">
+                <span class="text-emerald-600 font-bold">✓</span>
+                <span><strong>Robôs (RPA)</strong> executando conciliações, cadastros e validações fiscais em segundos.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-emerald-600 font-bold">✓</span>
+                <span><strong>Softwares sob medida</strong> desenhados cirurgicamente para as regras do seu negócio.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-emerald-600 font-bold">✓</span>
+                <span><strong>Dashboards de BI</strong> com dados consolidados e atualizados instantaneamente.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="text-emerald-600 font-bold">✓</span>
+                <span>Sua equipe focada no que gera receita: estratégia, atendimento e vendas.</span>
+              </li>
+            </ul>
+          </div>
+          <div class="mt-6 pt-4 border-t border-blue-200/70 text-xs font-bold text-neo-800">
+            Resultado: Escala real sem inflar a folha de pagamento, com precisão matemática.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO 1: PILARES & SOLUÇÕES ==================== -->
+  <section id="solucoes" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-bold tracking-widest uppercase text-neo-600 bg-blue-100/60 px-3.5 py-1 rounded-full">Nossas Especialidades</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4 tracking-tight">O que construímos para o seu negócio</h2>
+        <p class="text-slate-600 text-base sm:text-lg mt-3">Combinamos visão de negócios com engenharia de ponta para entregar soluções completas e escaláveis.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Card 1: Softwares Sob Medida -->
+        <div class="bg-white p-7 rounded-3xl border border-slate-200/80 shadow-card card-transition flex flex-col justify-between">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-blue-50 text-neo-600 flex items-center justify-center mb-6 shadow-inner">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Softwares Sob Medida</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+              Sistemas web, plataformas SaaS, portais corporativos e ERPs modulares desenvolvidos especificamente para as necessidades operacionais da sua empresa.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-neo-600">
+            <span>Web, Cloud & Mobile</span>
+            <span class="text-slate-400">→</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Automação & RPA -->
+        <div class="bg-white p-7 rounded-3xl border border-slate-200/80 shadow-card card-transition flex flex-col justify-between">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-cyan-50 text-cyan-600 flex items-center justify-center mb-6 shadow-inner">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Automação & Robôs (RPA)</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+              Robotização de processos repetitivos: extração fiscal, conciliação de pagamentos, preenchimento de formulários e integração entre sistemas sem API.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-cyan-700">
+            <span>Zero Erro Humano</span>
+            <span class="text-slate-400">→</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Business Intelligence -->
+        <div class="bg-white p-7 rounded-3xl border border-slate-200/80 shadow-card card-transition flex flex-col justify-between">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6 shadow-inner">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Business Intelligence (BI)</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+              Transformação de dados brutos em painéis de controle vivos, gráficos interativos e indicadores de performance (KPIs) para a diretoria.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-emerald-700">
+            <span>Decisão Baseada em Fatos</span>
+            <span class="text-slate-400">→</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Consultoria Estratégica & LGPD -->
+        <div class="bg-white p-7 rounded-3xl border border-slate-200/80 shadow-card card-transition flex flex-col justify-between">
+          <div>
+            <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-6 shadow-inner">
+              <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Governança & Segurança</h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+              Diagnóstico de maturidade tecnológica, adequação à LGPD, auditoria de infraestrutura e desenho de arquiteturas seguras em nuvem.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-amber-700">
+            <span>Blindagem Corporativa</span>
+            <span class="text-slate-400">→</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO 2: PORTFÓLIO DE APLICAÇÕES DESENVOLVIDAS ==================== -->
+  <section id="portfolio" class="py-24 bg-white border-t border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Cabeçalho da Seção -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div class="max-w-2xl">
+          <span class="text-xs font-bold tracking-widest uppercase text-neo-600 bg-blue-100/60 px-3.5 py-1 rounded-full">Portfólio de Soluções</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4 tracking-tight">
+            Softwares e plataformas reais criadas pela Neo
+          </h2>
+          <p class="text-slate-600 text-base sm:text-lg mt-3">
+            Conheça alguns dos ecossistemas digitais, portais corporativos e motores analíticos concebidos, desenhados e implementados pela nossa equipe.
+          </p>
+        </div>
+
+        <!-- Filtros Rápidos -->
+        <div class="flex flex-wrap gap-2" id="portfolioFilter">
+          <button onclick="filterPortfolio('all')" class="filter-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-neo-800 text-white shadow-sm transition-all" data-category="all">
+            Todos os Projetos
+          </button>
+          <button onclick="filterPortfolio('gestao')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all" data-category="gestao">
+            Gestão & ERP
+          </button>
+          <button onclick="filterPortfolio('analytics')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all" data-category="analytics">
+            BI & Cobrança
+          </button>
+          <button onclick="filterPortfolio('comercial')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all" data-category="comercial">
+            Vendas & CRM
+          </button>
+          <button onclick="filterPortfolio('webapps')" class="filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all" data-category="webapps">
+            Plataformas Web
+          </button>
+        </div>
+      </div>
+
+      <!-- Grid de Projetos -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="projectsGrid">
+
+        <!-- Projeto 1: BVG Axis (Gestão Jurídica) -->
+        <div class="project-card bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-card-hover card-transition flex flex-col justify-between group cursor-pointer" data-category="gestao" onclick="openProjectModal('bvgaxis')">
+          <div class="relative overflow-hidden aspect-[16/10] bg-slate-200">
+            <img src="assets/portfolio/bvgaxis.png" alt="Portal Corporativo de Gestão Jurídica" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="text-xs font-bold text-white bg-neo-600/90 px-3 py-1 rounded-lg backdrop-blur-sm">Clique para expandir</span>
+            </div>
+            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[11px] font-bold text-neo-800 px-2.5 py-1 rounded-lg shadow-sm">
+              Gestão Corporativa
+            </span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-neo-600 transition-colors">BVG Axis</h3>
+              <p class="text-xs font-medium text-slate-500 mb-2">Portal de Gestão Jurídica e Contratos</p>
+              <p class="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                Ambiente integrado para controle de contencioso, gestão de contratos, fluxos de aprovação de parceiros e colaboradores em tempo real.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-[11px] font-semibold text-neo-600">
+              <span>Auditoria & Segurança</span>
+              <span>Ver detalhes →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projeto 2: Gescom (Compras & Estoque) -->
+        <div class="project-card bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-card-hover card-transition flex flex-col justify-between group cursor-pointer" data-category="gestao" onclick="openProjectModal('estoque')">
+          <div class="relative overflow-hidden aspect-[16/10] bg-slate-200">
+            <img src="assets/portfolio/estoque_bvg.png" alt="Gescom - Gestão de Compras e Orçamento" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="text-xs font-bold text-white bg-neo-600/90 px-3 py-1 rounded-lg backdrop-blur-sm">Clique para expandir</span>
+            </div>
+            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[11px] font-bold text-emerald-700 px-2.5 py-1 rounded-lg shadow-sm">
+              Suprimentos & Budget
+            </span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-neo-600 transition-colors">Gescom Suprimentos</h3>
+              <p class="text-xs font-medium text-slate-500 mb-2">Compras, Estoque e Alçadas</p>
+              <p class="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                Plataforma com alçadas de aprovação em minutos, redução comprovada de 18% em despesas de compras e conferência de almoxarifado no celular.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-[11px] font-semibold text-emerald-700">
+              <span>-18% Custo de Compras</span>
+              <span>Ver detalhes →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projeto 3: CRM BVG (Comercial & IA) -->
+        <div class="project-card bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-card-hover card-transition flex flex-col justify-between group cursor-pointer" data-category="comercial" onclick="openProjectModal('buscrm')">
+          <div class="relative overflow-hidden aspect-[16/10] bg-slate-200">
+            <img src="assets/portfolio/buscrm.png" alt="CRM BVG - Inteligência de Vendas" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="text-xs font-bold text-white bg-neo-600/90 px-3 py-1 rounded-lg backdrop-blur-sm">Clique para expandir</span>
+            </div>
+            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[11px] font-bold text-neo-800 px-2.5 py-1 rounded-lg shadow-sm">
+              Vendas & IA
+            </span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-neo-600 transition-colors">CRM Comercial BVG</h3>
+              <p class="text-xs font-medium text-slate-500 mb-2">Funil de Vendas com Inteligência Artificial</p>
+              <p class="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                Pipeline dinâmico com geração automática de roteiros de vendas por IA, métricas de conversão e ganho de +40% na produtividade da equipe comercial.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-[11px] font-semibold text-neo-600">
+              <span>+40% Produtividade</span>
+              <span>Ver detalhes →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projeto 4: BV Cobrança Inteligente -->
+        <div class="project-card bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-card-hover card-transition flex flex-col justify-between group cursor-pointer" data-category="analytics" onclick="openProjectModal('cobranca')">
+          <div class="relative overflow-hidden aspect-[16/10] bg-slate-200">
+            <img src="assets/portfolio/cobranca_bvg.png" alt="Sistema de Cobrança Inteligente" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="text-xs font-bold text-white bg-neo-600/90 px-3 py-1 rounded-lg backdrop-blur-sm">Clique para expandir</span>
+            </div>
+            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[11px] font-bold text-amber-700 px-2.5 py-1 rounded-lg shadow-sm">
+              Fintech & Cobrança
+            </span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-neo-600 transition-colors">BV Cobrança Inteligente</h3>
+              <p class="text-xs font-medium text-slate-500 mb-2">Gestão Financeira & Réguas Automatizadas</p>
+              <p class="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                Monitoramento de inadimplência, gestão de tickets de atendimento, réguas automáticas de notificação e gráficos preditivos de liquidação.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-[11px] font-semibold text-amber-700">
+              <span>Régua Automatizada</span>
+              <span>Ver detalhes →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projeto 5: BI BVGarantia -->
+        <div class="project-card bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-card-hover card-transition flex flex-col justify-between group cursor-pointer" data-category="analytics" onclick="openProjectModal('bi')">
+          <div class="relative overflow-hidden aspect-[16/10] bg-slate-200">
+            <img src="assets/portfolio/bi_bvg.png" alt="Painel de Business Intelligence Executivo" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="text-xs font-bold text-white bg-neo-600/90 px-3 py-1 rounded-lg backdrop-blur-sm">Clique para expandir</span>
+            </div>
+            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[11px] font-bold text-neo-700 px-2.5 py-1 rounded-lg shadow-sm">
+              Data & Analytics
+            </span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-neo-600 transition-colors">BI Corporativo</h3>
+              <p class="text-xs font-medium text-slate-500 mb-2">Painel Executivo de Dados</p>
+              <p class="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                Consolidação de bases de dados heterogêneas em dashboards protegidos para monitoramento de KPIs vitais da diretoria.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-[11px] font-semibold text-neo-600">
+              <span>Tempo Real</span>
+              <span>Ver detalhes →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projeto 6: ReservAgora -->
+        <div class="project-card bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-card-hover card-transition flex flex-col justify-between group cursor-pointer" data-category="webapps" onclick="openProjectModal('reservagora')">
+          <div class="relative overflow-hidden aspect-[16/10] bg-slate-200">
+            <img src="assets/portfolio/reservagora.png" alt="ReservAgora - Sistema de Gestão de Reservas" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="text-xs font-bold text-white bg-neo-600/90 px-3 py-1 rounded-lg backdrop-blur-sm">Clique para expandir</span>
+            </div>
+            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[11px] font-bold text-orange-600 px-2.5 py-1 rounded-lg shadow-sm">
+              SaaS & Agendamento
+            </span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-neo-600 transition-colors">ReservAgora</h3>
+              <p class="text-xs font-medium text-slate-500 mb-2">Motor de Reservas e Capacidade</p>
+              <p class="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                Solução completa para gestão de fluxo de clientes, organização de mesas e turnos com zero fila de espera e controle centralizado.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-[11px] font-semibold text-orange-600">
+              <span>Otimização de Fluxo</span>
+              <span>Ver detalhes →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projeto 7: AppKaza -->
+        <div class="project-card bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-card-hover card-transition flex flex-col justify-between group cursor-pointer" data-category="gestao" onclick="openProjectModal('appkaza')">
+          <div class="relative overflow-hidden aspect-[16/10] bg-slate-200">
+            <img src="assets/portfolio/appkaza.png" alt="AppKaza - Gestão Imobiliária" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="text-xs font-bold text-white bg-neo-600/90 px-3 py-1 rounded-lg backdrop-blur-sm">Clique para expandir</span>
+            </div>
+            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[11px] font-bold text-cyan-700 px-2.5 py-1 rounded-lg shadow-sm">
+              PropTech & Ativos
+            </span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-neo-600 transition-colors">AppKaza</h3>
+              <p class="text-xs font-medium text-slate-500 mb-2">Gestão de Propriedades & Locações</p>
+              <p class="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                Hub unificado para administração de imóveis, acompanhamento de contratos de aluguel, taxa de ocupação e manutenção predial.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-[11px] font-semibold text-cyan-700">
+              <span>Gestão de Contratos</span>
+              <span>Ver detalhes →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projeto 8: Jogo da Vida -->
+        <div class="project-card bg-slate-50 rounded-3xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-card-hover card-transition flex flex-col justify-between group cursor-pointer" data-category="webapps" onclick="openProjectModal('jogodavida')">
+          <div class="relative overflow-hidden aspect-[16/10] bg-slate-200">
+            <img src="assets/portfolio/jogodavida.png" alt="Jogo da Vida: Destino" class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+              <span class="text-xs font-bold text-white bg-neo-600/90 px-3 py-1 rounded-lg backdrop-blur-sm">Clique para expandir</span>
+            </div>
+            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[11px] font-bold text-amber-600 px-2.5 py-1 rounded-lg shadow-sm">
+              Interatividade Web
+            </span>
+          </div>
+          <div class="p-5 flex-1 flex flex-col justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-slate-900 group-hover:text-neo-600 transition-colors">Jogo da Vida: Destino</h3>
+              <p class="text-xs font-medium text-slate-500 mb-2">Aplicação Web & Gamificação</p>
+              <p class="text-xs text-slate-600 leading-relaxed line-clamp-3">
+                Simulador web rico com interface isométrica, lógica complexa de tomada de decisões e arquitetura de alta escala sem necessidade de instalação.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-[11px] font-semibold text-amber-600">
+              <span>Alta Interatividade</span>
+              <span>Ver detalhes →</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Banner de Fechamento do Portfólio -->
+      <div class="mt-14 p-8 rounded-3xl bg-slate-900 text-white flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-neo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10">
+          <h3 class="text-xl sm:text-2xl font-bold">Tem uma ideia ou necessidade específica na sua empresa?</h3>
+          <p class="text-slate-400 text-sm mt-1">Nós desenhamos, construímos e colocamos no ar em tempo recorde.</p>
+        </div>
+        <button onclick="openContactModal('Novo Projeto de Software')" class="relative z-10 px-6 py-3.5 rounded-xl font-bold text-sm bg-neo-600 hover:bg-neo-500 text-white shadow-lg whitespace-nowrap transition-all">
+          Quero uma Solução Sob Medida
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO 3: AUTOMAÇÃO DE PROCESSOS & RPA ==================== -->
+  <section id="automacao" class="py-24 bg-slate-950 text-white relative overflow-hidden">
+    <!-- Luzes de fundo -->
+    <div class="absolute top-1/4 -left-20 w-96 h-96 bg-neo-600/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-10 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      
+      <!-- Cabeçalho Automação -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-bold tracking-widest uppercase text-cyan-400 bg-cyan-950/80 border border-cyan-800/60 px-4 py-1.5 rounded-full">
+          Robotic Process Automation (RPA)
+        </span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold mt-4 tracking-tight">
+          Robotize as tarefas repetitivas. <br />
+          <span class="gradient-text-light">Multiplique o poder da sua equipe.</span>
+        </h2>
+        <p class="text-slate-400 text-base sm:text-lg mt-4 leading-relaxed">
+          Toda tarefa manual executada repetidamente no computador pode — e deve — ser feita por um robô de software. Ele não cansa, não erra e opera 24 horas por dia.
+        </p>
+      </div>
+
+      <!-- Diagrama / Imagem da Arquitetura de Automação -->
+      <div class="mb-16 rounded-3xl overflow-hidden border border-slate-800 bg-slate-900/60 shadow-2xl p-4 sm:p-6 backdrop-blur-xl">
+        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-800/80">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+            <span class="text-xs font-mono text-slate-400 ml-2">neo-engine :: pipeline-automacao-rpa.active</span>
+          </div>
+          <span class="text-[11px] font-semibold text-cyan-400 bg-cyan-950/80 px-2.5 py-0.5 rounded-full border border-cyan-800/50">
+            Execução 24/7 em Nuvem
+          </span>
+        </div>
+        <img src="assets/automation_workflow.png" alt="Fluxo de Automação e Robotização de Processos" class="w-full h-auto rounded-2xl object-cover shadow-inner" loading="lazy" />
+        <p class="text-center text-xs text-slate-400 mt-4">
+          Integração nativa entre Bancos de Dados Empresariais, APIs, Servidores em Nuvem, IA Generativa e Robôs Digitais de Execução Contínua.
+        </p>
+      </div>
+
+      <!-- Casos Reais de Automações que Criamos -->
+      <div class="grid md:grid-cols-3 gap-6">
+        
+        <!-- Caso 1: Robôs Fiscais & Tributários -->
+        <div class="p-6 rounded-3xl bg-slate-900/80 border border-slate-800/80 hover:border-cyan-500/50 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-5 border border-cyan-500/20">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2zM10 8.5a.5.5 0 11-1 0 .5.5 0 011 0zm5 5a.5.5 0 11-1 0 .5.5 0 011 0z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Automação Fiscal & Tributária</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+              Robôs que baixam automaticamente XMLs de NF-e e CT-e na SEFAZ e prefeituras, conferem manifestos e alimentam o ERP sem digitação manual.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-800 text-xs font-semibold text-cyan-400">
+            Economia: ~40 horas/mês no financeiro
+          </div>
+        </div>
+
+        <!-- Caso 2: Conciliação Bancária Instantânea -->
+        <div class="p-6 rounded-3xl bg-slate-900/80 border border-slate-800/80 hover:border-cyan-500/50 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-5 border border-emerald-500/20">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Conciliação Financeira Automática</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+              Cruzamento de extratos bancários (OFX), recebimentos via Pix e cobranças emitidas com baixa contábil instantânea e alerta de divergências.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-800 text-xs font-semibold text-emerald-400">
+            Precisão: 100% de conciliação diária
+          </div>
+        </div>
+
+        <!-- Caso 3: Integração entre Sistemas Legados -->
+        <div class="p-6 rounded-3xl bg-slate-900/80 border border-slate-800/80 hover:border-cyan-500/50 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-neo-500/10 text-neo-400 flex items-center justify-center mb-5 border border-neo-500/20">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">Ponte entre Sistemas (APIs)</h3>
+            <p class="text-slate-400 text-sm leading-relaxed mb-4">
+              Integração de sistemas legados que "não conversam entre si". Conectamos WhatsApp, gateways de pagamento, CRMs e planilhas em um único fluxo.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-slate-800 text-xs font-semibold text-neo-400">
+            Fim definitivo do "copia e cola"
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tabela Comparativa de Impacto -->
+      <div class="mt-16 bg-slate-900/90 rounded-3xl border border-slate-800 p-6 sm:p-8">
+        <h3 class="text-xl font-bold mb-6 text-center text-white">Comparativo: Rotina Manual vs. Automação Neo</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-sm">
+            <thead>
+              <tr class="border-b border-slate-800 text-slate-400 text-xs uppercase tracking-wider">
+                <th class="py-3 px-4">Indicador</th>
+                <th class="py-3 px-4 text-rose-400">Processo Manual</th>
+                <th class="py-3 px-4 text-emerald-400 font-bold">Com Robôs da NeoTI</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800/60 text-slate-300">
+              <tr>
+                <td class="py-3 px-4 font-medium text-white">Tempo de Execução Diário</td>
+                <td class="py-3 px-4 text-rose-300">3 a 5 horas/dia por operador</td>
+                <td class="py-3 px-4 text-emerald-400 font-bold">Menos de 60 segundos</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-medium text-white">Taxa de Erro por Digitação</td>
+                <td class="py-3 px-4 text-rose-300">5% a 12% (falha humana natural)</td>
+                <td class="py-3 px-4 text-emerald-400 font-bold">0.00% (validação rígida)</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-medium text-white">Disponibilidade Operacional</td>
+                <td class="py-3 px-4 text-rose-300">Horário comercial restrito</td>
+                <td class="py-3 px-4 text-emerald-400 font-bold">24 horas / 7 dias por semana</td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-medium text-white">Capacidade de Escalar</td>
+                <td class="py-3 px-4 text-rose-300">Exige contratar mais funcionários</td>
+                <td class="py-3 px-4 text-emerald-400 font-bold">Escala instantânea sem custo de folha</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO 4: CALCULADORA INTERATIVA DE ROI ==================== -->
+  <section id="roi" class="py-20 bg-slate-100 border-b border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="bg-white rounded-3xl p-8 sm:p-12 shadow-card border border-slate-200/80">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+          <span class="text-xs font-bold uppercase tracking-wider text-neo-600 bg-blue-100/70 px-3 py-1 rounded-full">Simulador Interativo</span>
+          <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 mt-3">Quanto sua empresa economizaria robotizando processos?</h2>
+          <p class="text-slate-600 text-sm sm:text-base mt-2">Ajuste os controles abaixo e veja a projeção de tempo e custos recuperados anualmente.</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-10 items-center">
+          <!-- Controles / Sliders -->
+          <div class="space-y-6">
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <label class="text-sm font-bold text-slate-700">Colaboradores envolvidos em tarefas manuais:</label>
+                <span id="colabCountDisplay" class="text-lg font-extrabold text-neo-800 bg-blue-50 px-3 py-1 rounded-lg">3 pessoas</span>
+              </div>
+              <input type="range" id="colabSlider" min="1" max="25" value="3" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-neo-600" oninput="updateRoiCalculation()" />
+              <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                <span>1 pessoa</span>
+                <span>25 pessoas</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <label class="text-sm font-bold text-slate-700">Horas gastas por dia em tarefas repetitivas:</label>
+                <span id="hoursCountDisplay" class="text-lg font-extrabold text-neo-800 bg-blue-50 px-3 py-1 rounded-lg">2 horas/dia</span>
+              </div>
+              <input type="range" id="hoursSlider" min="1" max="6" value="2" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-neo-600" oninput="updateRoiCalculation()" />
+              <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                <span>1h / dia</span>
+                <span>6h / dia</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between items-center mb-2">
+                <label class="text-sm font-bold text-slate-700">Custo médio mensal por colaborador (R$):</label>
+                <span id="salaryCountDisplay" class="text-lg font-extrabold text-neo-800 bg-blue-50 px-3 py-1 rounded-lg">R$ 3.500</span>
+              </div>
+              <input type="range" id="salarySlider" min="2000" max="12000" step="500" value="3500" class="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-neo-600" oninput="updateRoiCalculation()" />
+              <div class="flex justify-between text-[11px] text-slate-400 mt-1">
+                <span>R$ 2.000</span>
+                <span>R$ 12.000</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Resultado Estimado -->
+          <div class="bg-gradient-to-br from-neo-900 to-neo-800 rounded-2xl p-6 sm:p-8 text-white text-center shadow-lg relative overflow-hidden">
+            <div class="text-xs uppercase tracking-widest font-semibold text-cyan-300 mb-2">Economia Anual Estimada</div>
+            <div id="annualSavingsDisplay" class="text-3xl sm:text-4xl font-extrabold text-emerald-400 mb-2">R$ 31.500,00</div>
+            <p class="text-xs text-slate-300 mb-6">Em horas salvas de trabalho repetitivo que poderão ser reinvestidas em vendas e crescimento.</p>
+
+            <div class="grid grid-cols-2 gap-3 pt-4 border-t border-white/10 mb-6 text-left">
+              <div>
+                <div class="text-[11px] text-slate-300">Horas Recuperadas / Ano:</div>
+                <div id="annualHoursDisplay" class="text-lg font-bold text-white">1.440 horas</div>
+              </div>
+              <div>
+                <div class="text-[11px] text-slate-300">Aumento de Capacidade:</div>
+                <div class="text-lg font-bold text-cyan-300">+40% foco em vendas</div>
+              </div>
+            </div>
+
+            <button onclick="openContactModal('Quero Economizar com Automação')" class="w-full py-3.5 px-4 rounded-xl font-bold text-sm bg-emerald-500 hover:bg-emerald-600 text-white shadow transition-all">
+              Quero Recuperar Essas Horas Agora
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO 5: DIFERENCIAIS DA NEO ==================== -->
+  <section id="diferenciais" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-bold tracking-widest uppercase text-neo-600 bg-blue-100/60 px-3.5 py-1 rounded-full">Por Que a Neo?</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4 tracking-tight">O parceiro técnico que fala a língua do seu faturamento</h2>
+        <p class="text-slate-600 text-base sm:text-lg mt-3">Não entregamos apenas código. Entregamos impacto direto na margem de lucro da sua empresa.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold mb-4">1</div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Propriedade 100% Sua</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            O código-fonte e as bases de dados desenvolvidos pertencem exclusivamente à sua empresa. Sem mensalidades abusivas de "licenciamento por usuário".
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold mb-4">2</div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Comunicação Sem "Tecniquês"</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Falamos de processos, prazos, custos e resultados. Você acompanha a evolução do software em reuniões semanais e entregas funcionais frequentes.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold mb-4">3</div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Arquitetura Moderna & Escalável</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Utilizamos as tecnologias mais robustas do mercado (nuvem, APIs REST, segurança de ponta e interfaces responsivas de altíssima velocidade).
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold mb-4">4</div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Segurança & Adequação LGPD</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Criptografia de dados ponta a ponta, controle estrito de permissões por perfil de usuário e logs completos de auditoria para compliance.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold mb-4">5</div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Agilidade de Implementação</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Metodologia ágil que permite colocar protótipos e robôs operacionais no ar em semanas, e não em anos, com retorno imediato sobre o investimento.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+          <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold mb-4">6</div>
+          <h3 class="text-lg font-bold text-slate-900 mb-2">Suporte Próximo & Consultivo</h3>
+          <p class="text-slate-600 text-sm leading-relaxed">
+            Você fala diretamente com quem planejou e construiu sua tecnologia. Sem intermediários, filas ou tickets que demoram dias para responder.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO 6: FORMULÁRIO DE CONTATO & DIAGNÓSTICO ==================== -->
+  <section id="contato" class="py-24 bg-slate-50 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <!-- Coluna de Informações / Persuasão -->
+        <div class="lg:col-span-5">
+          <span class="text-xs font-bold tracking-widest uppercase text-neo-600 bg-blue-100/60 px-3.5 py-1 rounded-full">Dê o Próximo Passo</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-4 tracking-tight leading-tight">
+            Pronto para transformar a tecnologia da sua empresa?
+          </h2>
+          <p class="text-slate-600 text-base mt-4 leading-relaxed">
+            Agende uma conversa estratégica de 20 minutos com a equipe da <strong>NeoTI</strong>. Vamos analisar suas dores operacionais e mostrar como um software sob medida ou robô de automação pode resolver de vez.
+          </p>
+
+          <div class="mt-8 space-y-4">
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+              <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-slate-500">Atendimento Direto no WhatsApp</div>
+                <a href="https://wa.me/5541992878797" target="_blank" class="text-base font-bold text-slate-900 hover:text-neo-600 transition-colors">
+                  (41) 99287-8797
+                </a>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white border border-slate-200/80 shadow-sm">
+              <div class="w-12 h-12 rounded-xl bg-pink-50 text-pink-600 flex items-center justify-center">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </div>
+              <div>
+                <div class="text-xs font-semibold text-slate-500">Instagram Oficial</div>
+                <a href="https://www.instagram.com/neo_ti25" target="_blank" class="text-base font-bold text-slate-900 hover:text-neo-600 transition-colors">
+                  @neo_ti25
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulário Integrado -->
+        <div class="lg:col-span-7">
+          <div class="bg-white rounded-3xl p-8 sm:p-10 shadow-card border border-slate-200/80">
+            <h3 class="text-2xl font-bold text-slate-900 mb-2">Solicite uma Proposta ou Diagnóstico</h3>
+            <p class="text-slate-500 text-sm mb-6">Preencha o formulário abaixo. Responderemos em poucas horas.</p>
+
+            <form id="mainContactForm" action="https://formsubmit.co/ajax/avaniltondepaula@gmail.com" method="POST" class="space-y-4">
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="box" />
+              <input type="hidden" name="_autoresponse" value="Olá! Recebemos sua mensagem na Neo Consultoria e em breve nossa equipe entrará em contato." />
+              <input type="hidden" name="Origem" value="Landing Page Principal" />
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Seu Nome *</label>
+                  <input type="text" name="Nome" required placeholder="Como podemos te chamar?" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neo-600 focus:border-transparent text-sm transition-all" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Nome da Empresa</label>
+                  <input type="text" name="Empresa" placeholder="Sua empresa ou negócio" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neo-600 focus:border-transparent text-sm transition-all" />
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">WhatsApp / Celular *</label>
+                  <input type="text" id="mainTelefone" name="Telefone" required placeholder="(00) 0 0000-0000" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neo-600 focus:border-transparent text-sm transition-all" />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">E-mail Corporativo *</label>
+                  <input type="email" name="Email" required placeholder="seu@email.com" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neo-600 focus:border-transparent text-sm transition-all" />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Principal Interesse *</label>
+                <select name="Interesse" required class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neo-600 focus:border-transparent text-sm transition-all text-slate-700">
+                  <option value="Desenvolvimento de Software Sob Medida">Desenvolvimento de Software Sob Medida</option>
+                  <option value="Robotização e Automação de Tarefas (RPA)">Robotização e Automação de Tarefas (RPA)</option>
+                  <option value="Business Intelligence & Dashboards">Business Intelligence & Dashboards</option>
+                  <option value="Integração de Sistemas e APIs">Integração de Sistemas e APIs</option>
+                  <option value="Consultoria Estratégica em TI">Consultoria Estratégica em TI</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Descreva brevemente sua necessidade *</label>
+                <textarea name="Mensagem" rows="3" required maxlength="500" placeholder="Ex: Preciso automatizar o fechamento financeiro e criar um painel gerencial..." class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-neo-600 focus:border-transparent text-sm transition-all"></textarea>
+              </div>
+
+              <button type="submit" id="mainSubmitBtn" class="w-full py-4 rounded-xl font-bold text-white bg-neo-800 hover:bg-neo-600 shadow-md hover:shadow-glow transition-all duration-200 flex items-center justify-center gap-2">
+                <span>Enviar Solicitação de Diagnóstico</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </button>
+
+              <div id="mainFormSuccess" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold text-center">
+                ✓ Mensagem recebida com sucesso! Nossa equipe entrará em contato em breve.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <img src="/Logo.png" alt="NeoTI Logo" class="h-10 w-auto brightness-0 invert" />
+        <span class="text-sm font-medium text-slate-300">Neo Consultoria & Tecnologia © 2026. Todos os direitos reservados.</span>
+      </div>
+
+      <div class="flex items-center gap-6 text-sm">
+        <a href="#solucoes" class="hover:text-white transition-colors">Soluções</a>
+        <a href="#portfolio" class="hover:text-white transition-colors">Portfólio</a>
+        <a href="#automacao" class="hover:text-white transition-colors">RPA</a>
+        <a href="https://www.instagram.com/neo_ti25" target="_blank" class="hover:text-white transition-colors">Instagram</a>
+        <a href="https://wa.me/5541992878797" target="_blank" class="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors">WhatsApp</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== MODAL DE PROJETO (ZOOM & DETALHES) ==================== -->
+  <div id="projectModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center hidden z-50 p-4 transition-opacity">
+    <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl border border-slate-200">
+      <button onclick="closeProjectModal()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-xl transition-colors">
+        ✕
+      </button>
+
+      <div class="p-6 sm:p-8">
+        <div class="rounded-2xl overflow-hidden border border-slate-200 mb-6 bg-slate-100 shadow-sm">
+          <img id="modalProjectImg" src="" alt="Screenshot da aplicação" class="w-full h-auto max-h-[500px] object-cover object-top" />
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+          <div>
+            <span id="modalProjectTag" class="text-xs font-bold text-neo-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-200">Tag</span>
+            <h3 id="modalProjectTitle" class="text-2xl font-extrabold text-slate-900 mt-2">Nome do Projeto</h3>
+            <p id="modalProjectSubtitle" class="text-sm font-medium text-slate-500">Subtítulo</p>
+          </div>
+          <button onclick="closeProjectModal(); openContactModal('Quero um sistema como este')" class="px-6 py-3 rounded-xl font-bold text-sm bg-neo-800 hover:bg-neo-600 text-white shadow transition-all">
+            Quero um Sistema Semelhante
+          </button>
+        </div>
+
+        <p id="modalProjectDescription" class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
+          Descrição detalhada...
+        </p>
+
+        <div class="grid sm:grid-cols-3 gap-4 pt-4 border-t border-slate-100" id="modalProjectHighlights">
+          <!-- Destaques preenchidos via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL DE CONTATO RÁPIDO ==================== -->
+  <div id="contactModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full relative shadow-2xl border border-slate-200">
+      <button onclick="closeContactModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-2xl font-bold">&times;</button>
+      
+      <div class="text-center mb-6">
+        <h3 class="text-2xl font-bold text-neo-800">Fale com a NeoTI</h3>
+        <p class="text-slate-500 text-xs sm:text-sm mt-1">Descubra como a tecnologia pode alavancar os lucros da sua empresa.</p>
+      </div>
+
+      <form id="modalContactForm" action="https://formsubmit.co/ajax/avaniltondepaula@gmail.com" method="POST" class="space-y-4">
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="box" />
+        <input type="hidden" name="_autoresponse" value="Recebemos sua mensagem! Em breve entraremos em contato." />
+        <input type="hidden" id="modalSubject" name="Assunto" value="Contato pelo Modal" />
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Nome completo:</label>
+          <input type="text" name="Nome" required placeholder="Seu nome" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-neo-600 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Telefone / WhatsApp:</label>
+          <input type="text" id="modalTelefone" name="Telefone" required placeholder="(00) 0 0000-0000" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-neo-600 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">E-mail corporativo:</label>
+          <input type="email" name="Email" required placeholder="seu@email.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-neo-600 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Como podemos te ajudar?</label>
+          <textarea name="Mensagem" rows="3" required maxlength="500" placeholder="Conte um pouco sobre sua empresa ou o desafio que precisa resolver..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-neo-600 focus:outline-none"></textarea>
+        </div>
+
+        <button type="submit" id="modalSubmitBtn" class="w-full py-3.5 rounded-xl font-bold text-white bg-neo-800 hover:bg-neo-600 shadow transition-all">
+          Enviar Mensagem
+        </button>
+
+        <p id="modalFormSuccess" class="hidden text-emerald-600 text-center text-sm font-bold mt-2">
+          ✓ Obrigado! Em breve entraremos em contato.
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== BOTÃO FLUTUANTE DO WHATSAPP ==================== -->
+  <div class="fixed bottom-6 right-6 z-40 flex items-center gap-3">
+    <div class="hidden sm:flex bg-slate-900/90 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-sm pointer-events-none animate-bounce">
+      Fale conosco agora!
+    </div>
+    <a href="https://wa.me/5541992878797" target="_blank" title="Fale com a Neo no WhatsApp" class="whatsapp-pulse inline-flex items-center justify-center w-14 h-14 bg-emerald-500 hover:bg-emerald-600 rounded-full shadow-2xl transition-transform hover:scale-110">
+      <svg class="w-7 h-7 text-white fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+    </a>
+  </div>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    // Máscara de telefone
+    const phoneMaskConfig = { mask: '(00) 0 0000-0000' };
+    const mainPhone = document.getElementById('mainTelefone');
+    if (mainPhone) IMask(mainPhone, phoneMaskConfig);
+    const modalPhone = document.getElementById('modalTelefone');
+    if (modalPhone) IMask(modalPhone, phoneMaskConfig);
+
+    // Toggle menu mobile
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Modal de contato rápido
+    function openContactModal(subject = 'Consultoria Geral') {
+      const modal = document.getElementById('contactModal');
+      document.getElementById('modalSubject').value = subject;
+      modal.classList.remove('hidden');
+    }
+    function closeContactModal() {
+      const modal = document.getElementById('contactModal');
+      modal.classList.add('hidden');
+    }
+
+    // Dados detalhados dos projetos (sem expor as URLs reais)
+    const projectsData = {
+      bvgaxis: {
+        title: "BVG Axis",
+        subtitle: "Portal Corporativo de Gestão Jurídica e Contratos",
+        tag: "Gestão Corporativa & Compliance",
+        img: "assets/portfolio/bvgaxis.png",
+        description: "Solução completa e centralizada para gestão de contencioso, controle rigoroso de minutas, contratos e inteligência jurídica. O sistema dispõe de portais segregados com controle de permissão por perfis (Colaboradores e Parceiros externos), garantindo rastreabilidade absoluta de atos processuais e conformidade com a LGPD.",
+        highlights: [
+          { label: "Segurança de Acesso", val: "Autenticação em 2 fatores e perfis dedicados" },
+          { label: "Gestão de Prazos", val: "Alertas automáticos de vencimento contratual" },
+          { label: "Produtividade", val: "Redução de 65% no tempo de emissão de pareceres" }
+        ]
+      },
+      estoque: {
+        title: "Gescom Suprimentos",
+        subtitle: "Gestão Estratégica de Compras, Estoque e Budget",
+        tag: "Suprimentos & Almoxarifado",
+        img: "assets/portfolio/estoque_bvg.png",
+        description: "Plataforma desenvolvida para unificar compras, contratos, homologação de fornecedores, controle de estoque físico e budget de todas as filiais em um único ambiente. Inclui aprovação de pedidos por alçadas de diretoria diretamente no celular e auditoria de compras ponta a ponta.",
+        highlights: [
+          { label: "Economia Comprovada", val: "-18% no custo médio das compras corporativas" },
+          { label: "Velocidade", val: "3x mais rápido para aprovar pedidos entre filiais" },
+          { label: "Mobilidade Total", val: "Acesso e conferência de almoxarifado via smartphone" }
+        ]
+      },
+      buscrm: {
+        title: "CRM Comercial BVG",
+        subtitle: "Pipeline de Vendas Inteligente com Integração de IA",
+        tag: "Comercial & Inteligência Artificial",
+        img: "assets/portfolio/buscrm.png",
+        description: "Plataforma de CRM focada em alta conversão comercial. Permite gerenciar leads, acompanhar negócios em tempo real, disparar automações de follow-up e gerar roteiros de vendas personalizados através de modelos de inteligência artificial treinados para o segmento.",
+        highlights: [
+          { label: "Produtividade", val: "+40% de ligações e negociações concluídas" },
+          { label: "Inteligência Artificial", val: "Geração de roteiros consultivos sob demanda" },
+          { label: "Visão 360°", val: "Histórico completo de interações de cada cliente" }
+        ]
+      },
+      cobranca: {
+        title: "BV Cobrança Inteligente",
+        subtitle: "Gestão e Acompanhamento de Cobranças em Condomínios",
+        tag: "Fintech & Cobrança Condominial",
+        img: "assets/portfolio/cobranca_bvg.png",
+        description: "Sistema robusto para controle da esteira de cobrança amigável e judicial. Com painéis interativos de volume de tickets semanais, métricas de tempo de resposta e cálculo automático de taxas e correções monetárias, a aplicação reduziu substancialmente a inadimplência.",
+        highlights: [
+          { label: "Tempo de Resposta", val: "Média de 1.4 horas por ticket de liquidação" },
+          { label: "Taxa de Resolução", val: "92% de acordos formalizados na régua inicial" },
+          { label: "Visão Executiva", val: "Dashboards analíticos em tempo real" }
+        ]
+      },
+      bi: {
+        title: "BI Corporativo",
+        subtitle: "Business Intelligence e Análise de Indicadores",
+        tag: "Data Analytics & Big Data",
+        img: "assets/portfolio/bi_bvg.png",
+        description: "Central de inteligência de dados que coleta informações de múltiplos bancos relacionais e planilhas distribuídas, transformando tudo em indicadores claros de faturamento, custos e lucratividade operacional para os diretores e conselho.",
+        highlights: [
+          { label: "Decisões Ágeis", val: "Dados atualizados minuto a minuto" },
+          { label: "Segurança de Nível Bancário", val: "Acesso restrito e criptografia de ponta" },
+          { label: "Consolidação", val: "Eliminação total de relatórios manuais em Excel" }
+        ]
+      },
+      reservagora: {
+        title: "ReservAgora",
+        subtitle: "Sistema de Otimização e Gestão de Reservas",
+        tag: "SaaS & Ocupação de Espaço",
+        img: "assets/portfolio/reservagora.png",
+        description: "Plataforma pensada para restaurantes e estabelecimentos que necessitam maximizar sua taxa de ocupação. Permite agendamentos digitais, mapeamento interativo de mesas, histórico de frequência do cliente e previsão de demanda por horário.",
+        highlights: [
+          { label: "Ocupação Máxima", val: "Zero mesas ociosas nos horários de pico" },
+          { label: "Agilidade", val: "Interface limpa adaptada para operadores de caixa e garçons" },
+          { label: "Fidelização", val: "Base unificada de preferências de clientes" }
+        ]
+      },
+      appkaza: {
+        title: "AppKaza",
+        subtitle: "Plataforma de Gestão Imobiliária & Locações",
+        tag: "PropTech & Ativos Residenciais",
+        img: "assets/portfolio/appkaza.png",
+        description: "Ambiente moderno para gestão integrada de portfólio imobiliário, contratos de locação, vistorias, chamados de manutenção e controle de inadimplência. Simplifica a comunicação entre proprietários, inquilinos e administradoras.",
+        highlights: [
+          { label: "Controle Financeiro", val: "Recebimento e repasses automatizados" },
+          { label: "Manutenção Ágil", val: "Abertura e triagem de ordens de serviço digitais" },
+          { label: "Taxa de Ocupação", val: "Monitoramento em tempo real do patrimônio" }
+        ]
+      },
+      jogodavida: {
+        title: "Jogo da Vida: Destino",
+        subtitle: "Aplicação Web Interativa & Gamificação",
+        tag: "Gamificação & Cloud Interativa",
+        img: "assets/portfolio/jogodavida.png",
+        description: "Aplicação web rica desenvolvida com renderização interativa no navegador, demonstrando a capacidade da NeoTI de construir interfaces altamente engajadoras, lógicas complexas de simulação de decisões em nuvem e desempenho fluído em qualquer dispositivo.",
+        highlights: [
+          { label: "Zero Download", val: "Execução 100% nativa direto no navegador web" },
+          { label: "Engajamento", val: "Retenção de usuários e salvamento automático em nuvem" },
+          { label: "Design Isométrico", val: "Visual moderno com física e interações dinâmicas" }
+        ]
+      }
+    };
+
+    // Modal de Projetos
+    function openProjectModal(key) {
+      const data = projectsData[key];
+      if (!data) return;
+
+      document.getElementById('modalProjectImg').src = data.img;
+      document.getElementById('modalProjectTitle').innerText = data.title;
+      document.getElementById('modalProjectSubtitle').innerText = data.subtitle;
+      document.getElementById('modalProjectTag').innerText = data.tag;
+      document.getElementById('modalProjectDescription').innerText = data.description;
+
+      const highlightsContainer = document.getElementById('modalProjectHighlights');
+      highlightsContainer.innerHTML = '';
+      data.highlights.forEach(h => {
+        const div = document.createElement('div');
+        div.className = 'p-3 rounded-xl bg-slate-50 border border-slate-200';
+        div.innerHTML = `<div class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">${h.label}</div><div class="text-sm font-extrabold text-neo-800 mt-0.5">${h.val}</div>`;
+        highlightsContainer.appendChild(div);
+      });
+
+      document.getElementById('projectModal').classList.remove('hidden');
+    }
+    function closeProjectModal() {
+      document.getElementById('projectModal').classList.add('hidden');
+    }
+
+    // Filtros de Projetos
+    function filterPortfolio(category) {
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => {
+        if (btn.getAttribute('data-category') === category) {
+          btn.className = "filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-neo-800 text-white shadow-sm transition-all";
+        } else {
+          btn.className = "filter-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all";
+        }
+      });
+
+      const cards = document.querySelectorAll('.project-card');
+      cards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (category === 'all' || cardCategory === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Calculadora Interativa de ROI
+    function updateRoiCalculation() {
+      const colabs = parseInt(document.getElementById('colabSlider').value);
+      const hours = parseInt(document.getElementById('hoursSlider').value);
+      const salary = parseInt(document.getElementById('salarySlider').value);
+
+      document.getElementById('colabCountDisplay').innerText = colabs + (colabs > 1 ? ' pessoas' : ' pessoa');
+      document.getElementById('hoursCountDisplay').innerText = hours + (hours > 1 ? ' horas/dia' : ' hora/dia');
+      document.getElementById('salaryCountDisplay').innerText = 'R$ ' + salary.toLocaleString('pt-BR');
+
+      // 22 dias úteis no mês, 12 meses
+      const monthlyHours = colabs * hours * 22;
+      const annualHours = monthlyHours * 12;
+
+      // Custo da hora (salário dividido por 160h normais)
+      const hourlyCost = salary / 160;
+      const annualSavings = (annualHours * hourlyCost) * 0.70; // Considera 70% de economia conservadora
+
+      document.getElementById('annualHoursDisplay').innerText = annualHours.toLocaleString('pt-BR') + ' horas';
+      document.getElementById('annualSavingsDisplay').innerText = 'R$ ' + Math.round(annualSavings).toLocaleString('pt-BR') + ',00';
+    }
+
+    // Envio assíncrono do formulário principal
+    document.getElementById('mainContactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = document.getElementById('mainSubmitBtn');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = 'Enviando sua mensagem...';
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(res => {
+        if (res.ok) {
+          form.reset();
+          document.getElementById('mainFormSuccess').classList.remove('hidden');
+          btn.innerHTML = '✓ Enviado com Sucesso!';
+          setTimeout(() => {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+          }, 5000);
+        } else {
+          alert("Ocorreu um erro ao enviar. Por favor, tente via WhatsApp.");
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+        }
+      }).catch(() => {
+        alert("Ocorreu um erro de conexão. Por favor, tente via WhatsApp.");
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      });
+    });
+
+    // Envio assíncrono do formulário do modal
+    document.getElementById('modalContactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = document.getElementById('modalSubmitBtn');
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = 'Enviando...';
+
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(res => {
+        if (res.ok) {
+          form.reset();
+          document.getElementById('modalFormSuccess').classList.remove('hidden');
+          btn.innerHTML = '✓ Enviado!';
+          setTimeout(() => {
+            closeContactModal();
+            document.getElementById('modalFormSuccess').classList.add('hidden');
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+          }, 2500);
+        } else {
+          alert("Ocorreu um erro ao enviar. Por favor, fale no WhatsApp.");
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+        }
+      }).catch(() => {
+        alert("Ocorreu um erro de conexão. Por favor, fale no WhatsApp.");
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      });
+    });
+
+    // Fechar modais ao teclar ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeProjectModal();
+        closeContactModal();
+      }
+    });
+
+    // Inicializa cálculo de ROI
+    updateRoiCalculation();
+  </script>
 </body>
 </html>
